@@ -51,19 +51,49 @@ void change_password(){
 
 }
 
+void create_bank_account(){
+  if(isLoggedIn()){
+    string account_number, username;
+    int account_pin;
+    cout << "enter username "; cin>> username;
+    cout << "enter account number "; cin>> account_number;
+    cout << "enter account pin "; cin>> account_pin;
+    ofstream file;
+    file.open("data/" + username + "acct" + ".txt");
+    file << account_number<<endl << account_pin;
+    file.close();
+    cout << "account succesfully created";
+  }else{
+    cout << "you need to be logged in to create an account \n";
+  }
+}
 
-int main(){
-  int choice ;
-  cout << "1 Register \n2: Login\n3: Change password\n Your choice: ";
-  cin>> choice;
-  if(choice == 1){
-    string username, password;
+void create_account(){
+   string username, password;
     cout << "Select a username: "; cin >> username;
     cout << "Select a password: "; cin >> password;
     ofstream file;
     file.open("data/" + username + ".txt");
     file << username <<endl << password;
     file.close();
+}
+
+
+void make_deposit(){
+  string username;
+  string pin;
+  int amount;
+
+
+}
+
+int main(){
+  
+  int choice ;
+  cout << "1 Register \n2: Login\n3: Change password\n4 Create Account\nYour choice: ";
+  cin>> choice;
+  if(choice == 1){
+    create_account();
     main();
   } else if(choice == 2){
     bool status = isLoggedIn();
@@ -79,6 +109,8 @@ int main(){
     }
   }else if(choice == 3){
     change_password();
+  }else if(choice == 4){
+    create_bank_account();
   }
 
   return 0;
